@@ -7,6 +7,7 @@ public class ScorerManager : MonoBehaviour {
 	public GameObject scoreUiText;
 
 	private int score = 0;
+	private int highScore;
 
 	public void increaseScore(int val) {
 		score += val;

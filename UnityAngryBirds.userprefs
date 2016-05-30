@@ -1,14 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Manager\CameraManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Entities\BomberBird.cs">
     <Files>
-      <File FileName="Assets\Scripts\Manager\GameUIManager.cs" Line="9" Column="2" />
-      <File FileName="Assets\Scripts\Entities\Bird.cs" Line="80" Column="1" />
-      <File FileName="Assets\Scripts\Entities\Plank.cs" Line="59" Column="64" />
+      <File FileName="Assets\Scripts\Entities\BomberBird.cs" Line="31" Column="5" />
+      <File FileName="Assets\Scripts\Entities\Bird.cs" Line="68" Column="60" />
+      <File FileName="Assets\Scripts\Entities\Plank.cs" Line="42" Column="46" />
       <File FileName="Assets\Scripts\Entities\PuffSprite.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Manager\CameraManager.cs" Line="7" Column="1" />
+      <File FileName="Assets\Scripts\Manager\CameraManager.cs" Line="6" Column="33" />
       <File FileName="Assets\Scripts\MainMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Manager\ScorerManager.cs" Line="13" Column="24" />
+      <File FileName="Assets\Scripts\Manager\ScorerManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Manager\LevelManager.cs" Line="4" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

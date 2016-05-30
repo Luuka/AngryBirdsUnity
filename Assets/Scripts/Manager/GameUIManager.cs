@@ -28,7 +28,7 @@ public class GameUIManager : MonoBehaviour {
 		this.pauseButton.GetComponent<Button> ().interactable = true;
 		this.pauseUI.SetActive(false);
 	}
-
+	
 	public void onClickRestartPausePopin() {
 		Application.LoadLevel ("Level1");
 	}

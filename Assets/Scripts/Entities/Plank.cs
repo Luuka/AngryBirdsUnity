@@ -6,6 +6,8 @@ public class Plank : MonoBehaviour {
 	public GameObject puffSprite;
 
 	public float standardBirdResistance;
+	public float BomberBirdResistance;
+	public float BombBirdResistance;
 	public float woodPlankResistance;
 	public float groundResistance;
 	public float icePlankResistance;
@@ -28,6 +30,16 @@ public class Plank : MonoBehaviour {
 		switch (go.tag) {
 		case "StandardBird":
 			if(isOverBreakPointVelocity(col, this.standardBirdResistance)) {
+				destroyTargetWithPuff(this.gameObject);
+			}
+			break;
+		case "BomberBird":
+			if(isOverBreakPointVelocity(col, this.BomberBirdResistance)) {
+				destroyTargetWithPuff(this.gameObject);
+			}
+			break;
+		case "BombBird":
+			if(isOverBreakPointVelocity(col, this.BombBirdResistance)) {
 				destroyTargetWithPuff(this.gameObject);
 			}
 			break;

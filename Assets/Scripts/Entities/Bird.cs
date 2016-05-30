@@ -11,7 +11,8 @@ public class Bird : MonoBehaviour {
 
 	public GameObject BirdsLoader = null;
 	public bool isLoaded = false;
-	private bool isLaunched = false;
+	public bool isLaunched = false;
+	public bool isLanded = false;
 
 	public float maxDistance = 1;
 	
@@ -22,7 +23,21 @@ public class Bird : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (isLaunched && !isMoving ()) {
+			this.isLanded = true;
+			Camera.main.GetComponent<LevelManager> ().checkLevelState ();
+			
+			if(BirdsLoader != null && BirdsLoader.transform.childCount >= birdCounter) {
+				Bird nextBird = BirdsLoader.transform.GetChild(birdCounter-1).gameObject.GetComponent<Bird>();
+				if(!nextBird.isLaunched) {
+					nextBird.BirdsLoader = this.BirdsLoader;
+					nextBird.transform.position = this.originPosition;
+					nextBird.isLoaded = true;
+					this.BirdsLoader = null;
+					Camera.main.GetComponent<CameraManager>().BirdToFollow = nextBird.gameObject;
+				}
+			}
+		} 
 	}
 
 	void OnMouseDown()
@@ -39,7 +54,6 @@ public class Bird : MonoBehaviour {
 	void OnMouseUp() {
 		if (isReadyToDrag()) {
 			CameraManager.mouseState = "flying";
-			this.isLaunched = true;
 			Bird.birdCounter++;
 
 			Vector2 orientation = new Vector2 (this.transform.position.x, this.transform.position.y) - originPosition;
@@ -50,10 +64,10 @@ public class Bird : MonoBehaviour {
 
 			float angle = Vector2.Angle (orientation, baseVector);
 
-			Debug.Log ("ADD FORCE");
-			//this.GetComponent<Rigidbody2D> ().AddForce (orientation * -50000, ForceMode2D.Impulse);
 			this.GetComponent<Rigidbody2D> ().gravityScale = 1;
 			this.GetComponent<Rigidbody2D> ().velocity = orientation * -15;
+
+			this.isLaunched = true;
 		}
 
 	}
@@ -76,22 +90,19 @@ public class Bird : MonoBehaviour {
 		return !isLaunched && isLoaded;
 	}
 
+
+	public bool isMoving() {
+		float speed = this.GetComponent<Rigidbody2D>().velocity.magnitude;
+		if (speed > 0.2) {
+			return true;
+		}
+		return false;
+	}
+
 	public void OnCollisionEnter2D(Collision2D col) {
 
-			CameraManager.mouseState = "normal";
+		CameraManager.mouseState = "normal";
 
-			if(BirdsLoader != null) {
-				Bird nextBird = BirdsLoader.transform.GetChild(birdCounter-1).gameObject.GetComponent<Bird>();
-				if(!nextBird.isLaunched) {
-					nextBird.BirdsLoader = this.BirdsLoader;
-					nextBird.transform.position = this.originPosition;
-					nextBird.isLoaded = true;
-					this.BirdsLoader = null;
-					Camera.main.GetComponent<CameraManager>().BirdToFollow = nextBird.gameObject;
-				}
-			}
-
-		
 	}
 	
 }
