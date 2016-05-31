@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
 public class GameUIManager : MonoBehaviour {
 
 	public GameObject pauseButton;
@@ -31,5 +35,13 @@ public class GameUIManager : MonoBehaviour {
 	
 	public void onClickRestartPausePopin() {
 		Application.LoadLevel ("Level1");
+	}
+
+	public void onClickNextLevelButton(){
+		string actualLevelName = Application.loadedLevelName;
+		int numberLevelName    = Int32.Parse(actualLevelName.Substring(actualLevelName.Length - 1)) + 1;
+
+		Application.LoadLevel ("Level" + numberLevelName);
+
 	}
 }

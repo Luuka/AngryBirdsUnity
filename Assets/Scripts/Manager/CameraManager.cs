@@ -6,10 +6,9 @@ public class CameraManager : MonoBehaviour {
 	public static string mouseState = "normal";
 
 	public GameObject BirdToFollow;
-	
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
