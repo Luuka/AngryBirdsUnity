@@ -13,6 +13,7 @@ public class BomberBird : Bird {
 	
 	// Update is called once per frame
 	void Update () {
+		base.Update ();
 		if (this.isLaunched && !this.isLanded && this.isMoving () && !hasLaunchedBombs) {
 			if(Input.GetMouseButtonDown(0)) {
 				hasLaunchedBombs = true;

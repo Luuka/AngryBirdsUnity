@@ -22,7 +22,7 @@ public class Bird : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		if (isLaunched && !isMoving ()) {
 			this.isLanded = true;
 			Camera.main.GetComponent<LevelManager> ().checkLevelState ();
@@ -58,9 +58,6 @@ public class Bird : MonoBehaviour {
 
 			Vector2 orientation = new Vector2 (this.transform.position.x, this.transform.position.y) - originPosition;
 			Vector2 baseVector = new Vector2 (this.originPosition.x - maxDistance, this.originPosition.y) - this.originPosition;
-
-			Debug.DrawLine (this.originPosition, new Vector2 (this.transform.position.x, this.transform.position.y), Color.red, 1000000f, true);
-			/*Debug.DrawLine (this.originPosition, new Vector2(this.originPosition.x-maxDistance, this.originPosition.y), Color.blue, 1000000f,true);*/
 
 			float angle = Vector2.Angle (orientation, baseVector);
 

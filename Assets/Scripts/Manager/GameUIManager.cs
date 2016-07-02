@@ -34,14 +34,23 @@ public class GameUIManager : MonoBehaviour {
 	}
 	
 	public void onClickRestartPausePopin() {
-		Application.LoadLevel ("Level1");
+		Bird.birdCounter = 0;
+		CameraManager.mouseState = "normal";
+		Application.LoadLevel(Application.loadedLevel);
 	}
 
 	public void onClickNextLevelButton(){
+		Bird.birdCounter = 0;
+		CameraManager.mouseState = "normal";
+
 		string actualLevelName = Application.loadedLevelName;
 		int numberLevelName    = Int32.Parse(actualLevelName.Substring(actualLevelName.Length - 1)) + 1;
 
-		Application.LoadLevel ("Level" + numberLevelName);
+		if(numberLevelName <= 3){
+			Application.LoadLevel ("Level" + numberLevelName);
+		}else{
+			Application.LoadLevel("MainMenu");
+		}
 
 	}
 }

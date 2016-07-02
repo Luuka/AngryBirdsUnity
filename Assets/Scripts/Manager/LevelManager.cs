@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
@@ -11,12 +12,13 @@ public class LevelManager : MonoBehaviour {
 
 	public void checkLevelState() {
 		if (isLevelFinished ()) {
-
+			
 			if(countPlanks() == 0) {
-				Debug.Log ("WIN");
-
+				endGameUI.gameObject.transform.FindChild("PopinText").GetComponent<Text>().text = "Vous avez gagné ce niveau";
+				endGameUI.gameObject.transform.FindChild("NextLevelButton").gameObject.SetActive(true);
 			} else {
-				Debug.Log("LOSE");
+				endGameUI.gameObject.transform.FindChild("PopinText").GetComponent<Text>().text = "Vous avez perdu ce niveau";
+				endGameUI.gameObject.transform.FindChild("RestartButton").gameObject.SetActive(true);
 			}
 
 			this.endGameUI.SetActive(true);
@@ -36,35 +38,38 @@ public class LevelManager : MonoBehaviour {
 		GameObject[] woodPlanks = GameObject.FindGameObjectsWithTag ("WoodPlank");
 		GameObject[] icePlanks = GameObject.FindGameObjectsWithTag ("IcePlank");
 
-		int movingPlanks = 0;
-
-		foreach(GameObject woodPlank in woodPlanks){
-			if(woodPlank.GetComponent<Rigidbody2D>().velocity.magnitude < 0.2){
-				movingPlanks++;
-			}
-		}
-
-		foreach(GameObject icePlank in icePlanks){
-			if(icePlank.GetComponent<Rigidbody2D>().velocity.magnitude < 0.2){
-				movingPlanks++;
-			}
-		}
-
-
-		return movingPlanks;
+		return woodPlanks.Length + icePlanks.Length;
 	}
 	
 	public int countBirds() {
+		return countStandardBirds () + countBomberBirds ();
+	}
+
+	public int countStandardBirds() {
 		GameObject[] standardBirds = GameObject.FindGameObjectsWithTag ("StandardBird");
-
-		int notLaunchedStandardBird = 0;
-
+		
+		int notLaunchedBird = 0;
+		
 		foreach(GameObject bird in standardBirds){
 			if(!bird.GetComponent<Bird>().isLanded){
-				notLaunchedStandardBird++;
+				notLaunchedBird++;
 			}
 		}
+		
+		return notLaunchedBird;
+	}
 
-		return notLaunchedStandardBird;
+	public int countBomberBirds() {
+		GameObject[] standardBirds = GameObject.FindGameObjectsWithTag ("BomberBird");
+		
+		int notLaunchedBird = 0;
+		
+		foreach(GameObject bird in standardBirds){
+			if(!bird.GetComponent<Bird>().isLanded){
+				notLaunchedBird++;
+			}
+		}
+		
+		return notLaunchedBird;
 	}
 }
