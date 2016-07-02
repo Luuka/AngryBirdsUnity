@@ -7,4 +7,8 @@ public class MainMenu : MonoBehaviour {
 		Application.LoadLevel ("Level1");
 	}
 
+	public void quitGame() {
+		Application.Quit ();
+	}
+
 }
